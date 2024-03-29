@@ -241,7 +241,10 @@ input{
 }
 
 .modalRow.active{
-  display: block;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .afterMenuContainer.active{
@@ -259,10 +262,9 @@ input{
 }
 
 .modalDescription{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: row;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 }
 
 .modalTitleContainer{
@@ -273,6 +275,7 @@ input{
 
 .modalTitle{
   padding: 10px 30px;
+  margin: 0;
   color: lightgray;
   text-align: center;
 }
@@ -282,6 +285,7 @@ input{
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
+
   margin: 30px 20px;
 }
 
@@ -292,6 +296,7 @@ input{
   background-color: #54685E;
   max-width: 60%;
   color: lightgray;
+  text-align: center;
 }
 
 @keyframes fade-in {
