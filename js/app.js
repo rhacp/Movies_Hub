@@ -1,3 +1,5 @@
+let animationState = false;
+
 const apiLink = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=14226c1621a7eff4fdd3c02a21fcee6f&page=1";
 const imgPath = "https://image.tmdb.org/t/p/w1280";
 const searchApi = "https://api.themoviedb.org/3/search/movie?&api_key=14226c1621a7eff4fdd3c02a21fcee6f&query=";
@@ -5,6 +7,14 @@ const searchApi = "https://api.themoviedb.org/3/search/movie?&api_key=14226c1621
 const main = document.getElementById("section");
 const form = document.getElementById("form");
 const search = document.getElementById("query");
+const barTop = document.getElementById("topnav");
+
+// const modalButton = document.getElementById("modalButton");
+const modalContainer = document.getElementById("modalContainer");
+const modalRow = document.getElementById("modalRow");
+const menu = document.getElementById("afterMenuContainer");
+const body = document.querySelector("body");
+// modalButton.onclick = openModal;
 
 returnMovies(apiLink);
 
@@ -34,8 +44,8 @@ function returnMovies(url) {
         center.setAttribute("id", "center");
 
         const cardLink = document.createElement("a");
-        cardLink.setAttribute("id", "card-link");
-        cardLink.setAttribute("href", "#");
+        cardLink.setAttribute("id", "cardLink");
+        cardLink.setAttribute("href", "javascript:void(0);");
 
         const titleContainer = document.createElement("div");
         titleContainer.setAttribute("class", "titleContainer");
@@ -52,6 +62,8 @@ function returnMovies(url) {
         divRow.appendChild(cardLink);
 
         main.appendChild(divRow);
+
+        cardLink.onclick = openModal;
       });
     });
 }
@@ -67,3 +79,48 @@ form.addEventListener("submit", (e) => {
     search.value = "";
   }
 });
+
+function openModal() {
+  modalContainer.style.animation = "fade-in 1s";
+  modalContainer.classList.add("active");
+  modalRow.classList.add("active");
+  menu.classList.add("active");
+  animationState = true;
+}
+
+modalContainer.addEventListener("click", closeModal);
+
+function closeModal(e) {
+  if (modalContainer.contains(e.target) && modalRow.contains(e.target)) {
+  } else {
+    modalContainer.style.animation = "fade-out 1s";
+    modalContainer.addEventListener("animationend", function(e) {
+      if(e.animationName === 'fade-out'){
+        modalContainer.classList.remove("active");
+        modalRow.classList.remove("active");
+        menu.classList.remove("active");
+        // animationState = false;
+      }
+    });
+  }
+}
+
+
+const observer = new IntersectionObserver(
+  ([e]) => e.target.classList.toggle('isSticky', e.boundingClientRect.top < 0),
+  {threshold: [1]}
+);
+
+observer.observe(barTop);
+
+// document.addEventListener('animationstart', function (e) {
+//   if (e.animationName === 'fade-in') {
+//     e.target.classList.add('did-fade-in');
+//   }
+// });
+//
+// document.addEventListener('animationend', function (e) {
+//   if (e.animationName === 'fade-out') {
+//     // e.target.classList.remove('did-fade-in');
+//   }
+// });

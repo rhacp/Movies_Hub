@@ -5,7 +5,8 @@
 body{
   /*background-color: #232b26;*/
 
-  /*background: rgb(35,43,38);*/
+  /*background: rgb(35,43,38);*
+  /
   /*background: linear-gradient(90deg, rgba(35,43,38,1) 45%, rgba(69,80,73,1) 100%);*/
 
   /*background-image: linear-gradient(to bottom, #131715, #1f2421, #2b322e, #38413b, #455049);*/
@@ -15,7 +16,7 @@ body{
   /*background-image: linear-gradient(to bottom, #232b26, #29322c, #2f3833, #363f39, #3c4640, #3c4640, #3c4640, #3c4640, #363f39, #2f3833, #29322c, #232b26);*/
 
   /*background-color: #131720;*/
-  font-family: sans-serif;
+  font-family: sans-sheriff fantasy;
 }
 
 h3{
@@ -31,11 +32,21 @@ h3{
   /*background-image: linear-gradient(to bottom, #131715, #141816, #151917, #161a18, #171b19, #171b19, #171b19, #171b19, #161a18, #151917, #141816, #131715);*/
   /*background-image: url("/banner.jpg");*/
   /*background-size: contain;*/
-  padding: 10px;
+  position: sticky;
   /*border-radius: 10px;*/
   border-bottom-left-radius: 40px;
   border-top-right-radius: 40px;
   margin: 30px;
+  height: 80px;
+  width: 95%;
+
+  top: -0.1px;
+  padding-top: calc(10px + 0.1px);
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  transition: 1s;
 
   /*transform: perspective(100px) rotateX(-1deg);*/
 
@@ -48,12 +59,20 @@ h3{
   /*clip-path: polygon(0 0, 100% 0, 100% 10vh, 0 100%);*/
 }
 
+.topnav.isSticky{
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 40px;
+  width: 100%;
+  margin: 0px;
+  transition: 1s;
+}
+
 .topnav a{
   float: left;
   display: block;
   color: lightgray;
   text-align: center;
-  padding: 14px 16px;
+  padding: 4px 26px;
   text-decoration: none;
   font-size: 1.7rem;
   text-transform: uppercase;
@@ -68,12 +87,12 @@ h3{
 form{
   background-color: #455049;
   /*width: 900px;*/
-  height: 50px;
-  border-radius: 15px;
+  height: 40px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
-  margin-top: 15px;
-  margin-right: 10px;
+  margin-top: 10px;
+  margin-right: 3%;
 }
 
 input{
@@ -148,12 +167,12 @@ input{
   padding-left: 5px;
 }
 
-.titleContainer {
+.titleContainer{
   background-color: #54685E;
   border-radius: 10px;
 }
 
-.logo {
+.logo{
   border-radius: 10px;
   height: 45px;
   margin-top: 3px;
@@ -161,14 +180,14 @@ input{
   /*padding: 5px;*/
 }
 
-.afterMenuContainer {
+.afterMenuContainer{
   float: left;
   margin-left: 3%;
   position: fixed;
   margin-top: -100px;
 }
 
-#section {
+#section{
   margin: 0 auto;
   /*width: 1560px;*/
   /*width: 1500px;*/
@@ -181,6 +200,121 @@ input{
 
   /*text-align: center;*/
 }
+
+.modalContainer{
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0, .8);
+  /*border: solid 2px;*/
+  position: fixed;
+  padding: 0;
+  margin:0;
+  top: 0;
+  left: 0;
+
+  /*display: grid;*/
+  /*align-items: center;*/
+  /*justify-items: center;*/
+}
+
+.modalContainer.active{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  /*animation: fade-in 1s;*/
+}
+
+/*.modalContainer.did-fade-in{*/
+/*  animation: fade-out 1s;*/
+/*}*/
+
+.modalRow {
+  display: none;
+  background-color: #232b26;
+  margin-top: 50px;
+  width: 80%;
+  padding: 15px;
+  border-radius: 19px;
+  border: 3px solid lightgray;
+}
+
+.modalRow.active{
+  display: block;
+}
+
+.afterMenuContainer.active{
+  display: none;
+}
+
+.modalColumn{
+  float: left;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.modalDescription{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.modalTitleContainer{
+  background-color: #54685E;
+  border-radius: 10px;
+  /*width: 50%;*/
+}
+
+.modalTitle{
+  padding: 10px 30px;
+  color: lightgray;
+  text-align: center;
+}
+
+.modalSecondContainer{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 30px 20px;
+}
+
+.modalSecondDescription{
+  padding: 10px;
+  border-radius: 19px;
+  margin-left: 30px;
+  background-color: #54685E;
+  max-width: 60%;
+  color: lightgray;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/*.ui-dialog-titlebar {*/
+/*  background:red;*/
+/*}*/
 
 /*------------*/
 
