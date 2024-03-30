@@ -38,6 +38,15 @@ divModalSecondDescription.setAttribute("class", "modalSecondDescription");
 const h4ModalText = document.createElement("h4");
 h4ModalText.setAttribute("class", "modalText");
 
+divModalSecondDescription.appendChild(h4ModalText);
+divModalSecondContainer.appendChild(imgThumbnail);
+divModalSecondContainer.appendChild(divModalSecondDescription);
+divModalTitleContainer.appendChild(h2ModalTitle);
+divModalDescription.appendChild(divModalTitleContainer);
+divModalDescription.appendChild(divModalSecondContainer);
+divModalColumn.appendChild(divModalDescription);
+modalRow.appendChild(divModalColumn);
+
 returnMovies(apiLink);
 
 function returnMovies(url) {
@@ -144,15 +153,6 @@ function returnMovie(url) {
       // h2ModalTitle.innerHTML = movie.title;
       // imgThumbnail.src = imgPath + movie.poster_path;
       // h4ModalText.innerHTML = movie.overview;
-
-      divModalSecondDescription.appendChild(h4ModalText);
-      divModalSecondContainer.appendChild(imgThumbnail);
-      divModalSecondContainer.appendChild(divModalSecondDescription);
-      divModalTitleContainer.appendChild(h2ModalTitle);
-      divModalDescription.appendChild(divModalTitleContainer);
-      divModalDescription.appendChild(divModalSecondContainer);
-      divModalColumn.appendChild(divModalDescription);
-      modalRow.appendChild(divModalColumn);
 
       modalContainer.addEventListener("animationend", function (e) {
         if (e.animationName === 'fade-out') {
