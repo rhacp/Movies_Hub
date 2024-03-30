@@ -7,11 +7,13 @@ const form = document.getElementById("form");
 const search = document.getElementById("query");
 const barTop = document.getElementById("topnav");
 
-// const modalButton = document.getElementById("modalButton");
 const modalContainer = document.getElementById("modalContainer");
 const modalRow = document.getElementById("modalRow");
 const menu = document.getElementById("afterMenuContainer");
 const body = document.querySelector("body");
+
+// MODAL TEST
+// const modalButton = document.getElementById("modalButton");
 // modalButton.onclick = openModal;
 
 const divModalColumn = document.createElement("div");
@@ -101,6 +103,33 @@ function returnMovies(url) {
     });
 }
 
+function returnMovie(url) {
+  fetch(url)
+    .then(res => res.json())
+    .then(function (data) {
+      console.log(data.results);
+      let movie = data.results[0];
+
+      console.log(movie);
+
+      h2ModalTitle.innerHTML = `${movie.title}`;
+      imgThumbnail.src = imgPath + `${movie.poster_path}`;
+      h4ModalText.innerHTML = `${movie.overview}`;
+
+      // h2ModalTitle.innerHTML = movie.title;
+      // imgThumbnail.src = imgPath + movie.poster_path;
+      // h4ModalText.innerHTML = movie.overview;
+
+      modalContainer.addEventListener("animationend", function (e) {
+        if (e.animationName === 'fade-out') {
+          h2ModalTitle.innerHTML = ``;
+          imgThumbnail.src = ``;
+          h4ModalText.innerHTML = ``;
+        }
+      });
+    });
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   main.innerHTML = "";
@@ -137,49 +166,10 @@ function closeModal(e) {
   }
 }
 
-function returnMovie(url) {
-  fetch(url)
-    .then(res => res.json())
-    .then(function (data) {
-      console.log(data.results);
-      let movie = data.results[0];
-
-      console.log(movie);
-
-      h2ModalTitle.innerHTML = `${movie.title}`;
-      imgThumbnail.src = imgPath + `${movie.poster_path}`;
-      h4ModalText.innerHTML = `${movie.overview}`;
-
-      // h2ModalTitle.innerHTML = movie.title;
-      // imgThumbnail.src = imgPath + movie.poster_path;
-      // h4ModalText.innerHTML = movie.overview;
-
-      modalContainer.addEventListener("animationend", function (e) {
-        if (e.animationName === 'fade-out') {
-          h2ModalTitle.innerHTML = ``;
-          imgThumbnail.src = ``;
-          h4ModalText.innerHTML = ``;
-        }
-      });
-    });
-}
-
-
+//TOPNAV OBSERVER STICKY
 const observer = new IntersectionObserver(
   ([e]) => e.target.classList.toggle('isSticky', e.boundingClientRect.top < 0),
   {threshold: [1]}
 );
 
 observer.observe(barTop);
-
-// document.addEventListener('animationstart', function (e) {
-//   if (e.animationName === 'fade-in') {
-//     e.target.classList.add('did-fade-in');
-//   }
-// });
-//
-// document.addEventListener('animationend', function (e) {
-//   if (e.animationName === 'fade-out') {
-//     // e.target.classList.remove('did-fade-in');
-//   }
-// });
