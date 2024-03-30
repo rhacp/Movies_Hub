@@ -97,7 +97,9 @@ function returnMovies(url) {
         main.appendChild(divRow);
 
         let searchLocal = searchApi + `${element.title}`;
-        cardLink.addEventListener("click", function() {returnMovie(searchLocal);});
+        cardLink.addEventListener("click", function () {
+          returnMovie(searchLocal);
+        });
         cardLink.onclick = openModal;
       });
     });
