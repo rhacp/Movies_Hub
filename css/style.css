@@ -193,6 +193,10 @@ input {
   display: none;
 }
 
+.topnav.active {
+  visibility: hidden;
+}
+
 .modalColumn {
   float: left;
   color: white;

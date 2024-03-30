@@ -149,6 +149,7 @@ function openModal() {
   modalContainer.classList.add("active");
   modalRow.classList.add("active");
   menu.classList.add("active");
+  barTop.classList.add("active");
   animationState = true;
 }
 
@@ -163,6 +164,7 @@ function closeModal(e) {
         modalContainer.classList.remove("active");
         modalRow.classList.remove("active");
         menu.classList.remove("active");
+        barTop.classList.remove("active");
       }
     });
   }
