@@ -100,7 +100,7 @@ form{
 input{
   all: unset;
   font: 15px system-ui;
-  color: #fff;
+  color: white;
   height: 100%;
   width: 100%;
   padding: 6px;
@@ -294,13 +294,17 @@ input{
 }
 
 .modalSecondDescription{
-  padding: 10px;
+  /*display: grid;*/
+  /*align-items: center;*/
+  /*justify-items: center;*/
+
+  padding: 25px;
   border-radius: 19px;
   margin-left: 30px;
   background-color: #54685E;
   max-width: 60%;
   color: lightgray;
-  text-align: center;
+  text-align: justify;
 }
 
 @keyframes fade-in {

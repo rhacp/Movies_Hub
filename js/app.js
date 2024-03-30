@@ -1,5 +1,3 @@
-let animationState = false;
-
 const apiLink = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=14226c1621a7eff4fdd3c02a21fcee6f&page=1";
 const imgPath = "https://image.tmdb.org/t/p/w1280";
 const searchApi = "https://api.themoviedb.org/3/search/movie?&api_key=14226c1621a7eff4fdd3c02a21fcee6f&query=";
@@ -15,6 +13,30 @@ const modalRow = document.getElementById("modalRow");
 const menu = document.getElementById("afterMenuContainer");
 const body = document.querySelector("body");
 // modalButton.onclick = openModal;
+
+const divModalColumn = document.createElement("div");
+divModalColumn.setAttribute("class", "modalColumn");
+
+const divModalDescription = document.createElement("div");
+divModalDescription.setAttribute("class", "modalDescription");
+
+const divModalTitleContainer = document.createElement("div");
+divModalTitleContainer.setAttribute("class", "modalTitleContainer");
+
+const h2ModalTitle = document.createElement("h2");
+h2ModalTitle.setAttribute("class", "modalTitle");
+
+const divModalSecondContainer = document.createElement("div");
+divModalSecondContainer.setAttribute("class", "modalSecondContainer");
+
+const imgThumbnail = document.createElement("img");
+imgThumbnail.setAttribute("class", "thumbnail");
+
+const divModalSecondDescription = document.createElement("div");
+divModalSecondDescription.setAttribute("class", "modalSecondDescription");
+
+const h4ModalText = document.createElement("h4");
+h4ModalText.setAttribute("class", "modalText");
 
 returnMovies(apiLink);
 
@@ -63,6 +85,8 @@ function returnMovies(url) {
 
         main.appendChild(divRow);
 
+        let searchLocal = searchApi + `${element.title}`;
+        cardLink.addEventListener("click", function() {returnMovie(searchLocal);});
         cardLink.onclick = openModal;
       });
     });
@@ -94,15 +118,50 @@ function closeModal(e) {
   if (modalContainer.contains(e.target) && modalRow.contains(e.target)) {
   } else {
     modalContainer.style.animation = "fade-out 1s";
-    modalContainer.addEventListener("animationend", function(e) {
-      if(e.animationName === 'fade-out'){
+    modalContainer.addEventListener("animationend", function (e) {
+      if (e.animationName === 'fade-out') {
         modalContainer.classList.remove("active");
         modalRow.classList.remove("active");
         menu.classList.remove("active");
-        // animationState = false;
       }
     });
   }
+}
+
+function returnMovie(url) {
+  fetch(url)
+    .then(res => res.json())
+    .then(function (data) {
+      console.log(data.results);
+      let movie = data.results[0];
+
+      console.log(movie);
+
+      h2ModalTitle.innerHTML = `${movie.title}`;
+      imgThumbnail.src = imgPath + `${movie.poster_path}`;
+      h4ModalText.innerHTML = `${movie.overview}`;
+
+      // h2ModalTitle.innerHTML = movie.title;
+      // imgThumbnail.src = imgPath + movie.poster_path;
+      // h4ModalText.innerHTML = movie.overview;
+
+      divModalSecondDescription.appendChild(h4ModalText);
+      divModalSecondContainer.appendChild(imgThumbnail);
+      divModalSecondContainer.appendChild(divModalSecondDescription);
+      divModalTitleContainer.appendChild(h2ModalTitle);
+      divModalDescription.appendChild(divModalTitleContainer);
+      divModalDescription.appendChild(divModalSecondContainer);
+      divModalColumn.appendChild(divModalDescription);
+      modalRow.appendChild(divModalColumn);
+
+      modalContainer.addEventListener("animationend", function (e) {
+        if (e.animationName === 'fade-out') {
+          h2ModalTitle.innerHTML = ``;
+          imgThumbnail.src = ``;
+          h4ModalText.innerHTML = ``;
+        }
+      });
+    });
 }
 
 
